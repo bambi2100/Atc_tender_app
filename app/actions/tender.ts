@@ -167,9 +167,10 @@ export async function extractTenderData(formData: FormData) {
   }
 }
 
-// دالة تحديث العطاء المُصححة والمكتملة برمجياً
-export async function updateTender(id: string | number, formData: FormData) {
+// دالة تحديث العطاء المتوافقة مع Next.js Server Actions
+export async function updateTender(formData: FormData) {
   try {
+    const id = formData.get('id')
     const title = formData.get('title') as string
     const client = formData.get('client') as string
     const reference = formData.get('reference') as string
@@ -178,6 +179,10 @@ export async function updateTender(id: string | number, formData: FormData) {
     const deadline = formData.get('deadline') as string
     const status = formData.get('status') as string
     const description = formData.get('description') as string
+
+    if (!id) {
+      throw new Error('معرف العطاء مطلوب للتحديث')
+    }
 
     await sql`
       UPDATE tenders 
@@ -194,9 +199,9 @@ export async function updateTender(id: string | number, formData: FormData) {
 
     revalidatePath(`/tenders/${id}`)
     revalidatePath('/tenders')
-    return { success: true }
+    redirect(`/tenders/${id}`)
   } catch (error) {
     console.error('Failed to update tender:', error)
-    return { success: false, error: 'Database error' }
+    throw error
   }
 }
