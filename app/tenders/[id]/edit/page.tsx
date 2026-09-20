@@ -32,6 +32,7 @@ export default async function EditTenderPage({ params }: PageProps) {
       <h1 className="text-2xl font-bold mb-6 text-gray-800">تعديل العطاء (Edit Tender)</h1>
 
       <form action={updateTender} className="space-y-4">
+        {/* معرف العطاء المخفي */}
         <input type="hidden" name="id" value={tender.id} />
 
         <div>
@@ -45,6 +46,28 @@ export default async function EditTenderPage({ params }: PageProps) {
           />
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">اسم العميل / الجهة (Client)</label>
+            <input
+              type="text"
+              name="client"
+              defaultValue={tender.client || ''}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">الرقم المرجعي (Reference)</label>
+            <input
+              type="text"
+              name="reference"
+              defaultValue={tender.reference || ''}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">الوصف (Description)</label>
           <textarea
@@ -55,15 +78,27 @@ export default async function EditTenderPage({ params }: PageProps) {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">الميزانية (Budget)</label>
-          <input
-            type="number"
-            step="0.01"
-            name="budget"
-            defaultValue={tender.budget || ''}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">الميزانية (Budget)</label>
+            <input
+              type="number"
+              step="0.01"
+              name="budget"
+              defaultValue={tender.budget || ''}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">العملة (Currency)</label>
+            <input
+              type="text"
+              name="currency"
+              defaultValue={tender.currency || 'AED'}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
         </div>
 
         <div>
