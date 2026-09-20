@@ -167,10 +167,9 @@ export async function extractTenderData(formData: FormData) {
   }
 }
 
-// دالة تحديث العطاء المتوافقة مع Next.js Server Actions
-export async function updateTender(formData: FormData) {
+// دالة تحديث العطاء تستقبل id و formData لمعالجة التعديل بكفاءة
+export async function updateTender(id: string | number, formData: FormData) {
   try {
-    const id = formData.get('id')
     const title = formData.get('title') as string
     const client = formData.get('client') as string
     const reference = formData.get('reference') as string
@@ -179,10 +178,6 @@ export async function updateTender(formData: FormData) {
     const deadline = formData.get('deadline') as string
     const status = formData.get('status') as string
     const description = formData.get('description') as string
-
-    if (!id) {
-      throw new Error('معرف العطاء مطلوب للتحديث')
-    }
 
     await sql`
       UPDATE tenders 
