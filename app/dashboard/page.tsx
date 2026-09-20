@@ -1,7 +1,7 @@
 import sql from '@/lib/db'
 import Link from 'next/link'
 import { UserButton } from '@clerk/nextjs'
-
+export const dynamic = 'force-dynamic'
 export default async function DashboardPage() {
   // جلب كافة العطاءات مرتبة حسب الموعد النهائي
   const tenders = await sql`SELECT * FROM tenders ORDER BY deadline ASC`
