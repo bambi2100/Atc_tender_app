@@ -1,6 +1,6 @@
 import sql from '@/lib/db'
 import Link from 'next/link'
-
+export const dynamic = 'force-dynamic'
 export default async function TendersPage() {
   // جلب كافة العطاءات من قاعدة البيانات مرتبة من الأحدث للأقدم
   const tenders = await sql`SELECT * FROM tenders ORDER BY id DESC`
